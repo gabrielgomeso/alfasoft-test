@@ -4,12 +4,12 @@ import 'firebase/compat/firestore';
 import { ref } from 'vue'
 
 const config = {
-  apiKey: "AIzaSyBZIwKXXpZzX4ebsbpna8LJT-3cabvk9eY",
-  authDomain: "alfasoft-test-36468.firebaseapp.com",
-  projectId: "alfasoft-test-36468",
-  storageBucket: "alfasoft-test-36468.appspot.com",
-  messagingSenderId: "827853511109",
-  appId: "1:827853511109:web:424911c9281dac066f93ac"
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_APP_ID,
 };
 
 const firebaseApp = firebase.initializeApp(config);

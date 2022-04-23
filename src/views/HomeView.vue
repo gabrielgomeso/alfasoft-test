@@ -6,11 +6,15 @@
 
         <ul>
           <li>
+            <router-link :to="`/details/${contact.id}`">Contact details</router-link>
+          </li>
+          <li>
             <router-link :to="`/edit/${contact.id}`">Edit contact</router-link>
           </li>
           <li>
-            <button @click="destroyContact(contact.id)">Delete contact</button>
+            <button @click="confirmDestroy()">Delete contact</button>
           </li>
+          <li v-show="toggleConfirmation">Are you sure you want to delete this contact? <button @click="destroyContact(contact.id)">Yes</button> <button>Cancel</button></li>
         </ul>
       </li>
     </ul>
@@ -24,10 +28,14 @@ export default {
   name: 'HomeView',
   data() {
     return {
+      toggleConfirmation: false,
       contacts: useLoadContacts(),
     }
   },
   methods: {
+    confirmDestroy() {
+      this.toggleConfirmation = !this.toggleConfirmation;
+    },
     destroyContact(id) {
       deleteContact(id)
     }

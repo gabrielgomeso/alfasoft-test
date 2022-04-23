@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+      <li v-for="contact in contacts" :key="contact.id">
+        {{ contact.contactName }} - {{ contact.id }}
+
+        <ul>
+          <li>
+            <router-link :to="`/edit/${contact.id}`">Edit contact</router-link>
+          </li>
+          <li>
+            <button @click="destroyContact(contact.id)">Delete contact</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { useLoadContacts, deleteContact } from '@/firebase'
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      contacts: useLoadContacts(),
+    }
+  },
+  methods: {
+    destroyContact(id) {
+      deleteContact(id)
+    }
+  },
 }
 </script>

@@ -14,7 +14,7 @@
           <li>
             <button @click="confirmDestroy()">Delete contact</button>
           </li>
-          <li v-show="toggleConfirmation">Are you sure you want to delete this contact? <button @click="destroyContact(contact.id)">Yes</button> <button>Cancel</button></li>
+          <li v-show="toggleConfirmation">Are you sure you want to delete this contact? <button @click="destroyContact(contact.id)">Yes</button> <button @click="confirmDestroy()">Cancel</button></li>
         </ul>
       </li>
     </ul>

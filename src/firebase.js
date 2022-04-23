@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { ref, onUnmounted } from 'vue'
+import { ref } from 'vue'
 
 const config = {
   apiKey: "AIzaSyBZIwKXXpZzX4ebsbpna8LJT-3cabvk9eY",
@@ -39,6 +39,5 @@ export const useLoadContacts = () => {
   contactsCollection.onSnapshot(snapshot => {
     contacts.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   });
-  onUnmounted(close);
   return contacts
 }

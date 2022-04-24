@@ -1,26 +1,39 @@
 <template>
   <h1>This is an edit page</h1>
-  <the-form
-    :form-data="form"
-  ></the-form>
+  <form @submit.prevent="submitForm">
+    <label for="name">Contact name:</label>
+    <input v-model="form.contactName" type="text" name="name">
+
+    <label for="number">Contact number:</label>
+    <input v-model="form.contactNumber" type="text" name="number">
+
+    <label for="email">Contact e-mail:</label>
+    <input v-model="form.contactEmail" type="text" name="email">
+
+    <!-- <label for="photo">Contact photo:</label>
+    <input v-on:change="form.contactPhoto" type="file" name="photo">
+
+    <img v-if="imagePreview != ''" :src="imagePreview"> -->
+
+    <button @click="submitForm" type="submit">
+      Edit Contact
+    </button>
+  </form>
 </template>
 
 <script>
-import TheForm from '../components/TheForm.vue';
 import { getContact, updateContact } from '../firebase.js';
 import { useRoute } from 'vue-router';
 export default {
-  components: {
-    TheForm,
-  },
   data() {
     return {
       form: {
         contactName: '',
         contactNumber: '',
         contactEmail: '',
-        // contactPhoto: '',
+        contactPhoto: '',
       },
+      imagePreview: '',
     }
   },
   computed: {
@@ -30,7 +43,6 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.contactId);
     const contact = await getContact(this.contactId);
     this.form.contactName = contact.contactName;
     this.form.contactNumber = contact.contactNumber;
@@ -38,8 +50,7 @@ export default {
   },
   methods: {
     async submitForm() {
-      await updateContact({ ...this.form });
-      console.log(this.form);
+      await updateContact(this.contactId, { ...this.form });
     }
   }
 }

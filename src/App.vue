@@ -1,6 +1,8 @@
 <template>
   <the-header></the-header>
-  <router-view/>
+  <main>
+    <router-view class="content" />
+  </main>
 </template>
 
 <script>
@@ -11,7 +13,6 @@ export default {
     TheHeader,
   }
 }
-
 </script>
 
 <style lang="scss">
@@ -25,9 +26,22 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3e517a;
+  width: 100vw;
+  height: 90vh;
+}
 
+.content {
+  width: 70vw;
+  background-color: #b08ea2;
+  padding: 3rem;
+  border-radius: 10px;
+}
 </style>

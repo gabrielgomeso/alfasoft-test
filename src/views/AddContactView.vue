@@ -20,11 +20,11 @@
       
       <div class="form-control">
         <label for="photo">Contact photo:</label>
-        <input v-on:change="form.contactPhoto" type="file" name="photo" class="form-control__input">
+        <input type="file" @change="onFileChange" name="photo" class="form-control__input" />
       </div>
       
       <div class="form-control">
-        <img v-if="imagePreview != ''" :src="imagePreview">
+        <img v-if="form.contactPhoto" :src="form.contactPhoto" class="preview" />
       </div>
 
       <div class="form-control">
@@ -46,7 +46,7 @@ export default {
         contactName: '',
         contactNumber: '',
         contactEmail: '',
-        contactPhoto: '',
+        contactPhoto: null,
       },
     }
   },
@@ -54,7 +54,11 @@ export default {
     async createNewContact() {
       await createContact({ ...this.form });
     },
-  }
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.form.contactPhoto = URL.createObjectURL(file);
+    }
+  },
 }
 </script>
 
@@ -84,6 +88,18 @@ export default {
         padding: 0.5rem;
         font-size: 1.2em;
       }
+    }
+
+    #preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #preview img {
+      padding: 1rem;
+      max-width: 100%;
+      max-height: 500px;
     }
   }
 }

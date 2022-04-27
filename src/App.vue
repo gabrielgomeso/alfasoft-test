@@ -24,9 +24,6 @@ export default {
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 
 main {
@@ -39,7 +36,7 @@ main {
 }
 
 .content {
-  width: 70vw;
+  min-width: 20vw;
   background-color: #b08ea2;
   padding: 3rem;
   border-radius: 10px;

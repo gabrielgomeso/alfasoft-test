@@ -1,7 +1,11 @@
 <template>
   <the-header></the-header>
   <main>
-    <router-view class="content" />
+    <router-view v-slot="{ Component }">
+      <transition name="enter-fade">
+        <component class="content" :is="Component" />
+      </transition>
+    </router-view>
   </main>
 </template>
 
@@ -40,5 +44,18 @@ main {
   background-color: #b08ea2;
   padding: 3rem;
   border-radius: 10px;
+}
+
+.enter-fade-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.enter-fade-leave-active {
+  transition: all 0.5s ease-out;
+}
+
+.enter-fade-enter-from,
+.enter-fade-leave-to {
+  opacity: 0;
 }
 </style>
